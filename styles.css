@@ -1,0 +1,136 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /* outline: 2px solid red; */
+}
+
+.header {
+    display: flex;
+    height: 90px;
+    background-color: #2E3E87;
+}
+
+.logo {
+    display: flex;
+    flex: 5;
+    padding-left: 150px;
+    padding-top: 5px;
+    align-items: center;
+}
+
+#logo {
+    height: 100px;
+    margin-right: 15px;
+    width: auto;
+}
+
+#name {
+    color: white;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.about {
+    display: flex;
+    height: 300px;
+    background-color: #F1EADA;
+    align-items: center;
+    justify-content: center;
+}
+
+.description {
+    text-align: center;
+    flex: 1;
+}
+
+.button-18 {
+  align-items: center;
+  background-color: #2E3E87;
+  border-radius: 100px;
+  display: inline-block;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+}
+
+.button-18:hover { 
+  background-color: #2A355C;
+  color: #ffffff;
+}
+
+.side-picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+#motto {
+    height: 300px;
+    width: auto;
+}
+
+.category {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F1EADA;
+}
+
+.hook {
+    flex: 1;
+}
+
+.subject {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 25px;
+    margin-bottom: 30px;
+}
+
+.subject-image {
+    width: 250px;
+    height: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#compulsory-math, #chemistry, #physics, #informatics, #elective-math {
+    height: 300px;
+    width: 300px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.footer {
+    background-color: #2A355C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
