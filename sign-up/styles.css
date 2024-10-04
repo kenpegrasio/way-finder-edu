@@ -1,0 +1,111 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /* outline: 2px solid red; */
+}
+
+.container {
+    display: flex;
+}
+
+.header {
+    display: flex;
+    height: 90px;
+    background-color: #2E3E87;
+}
+
+.logo {
+    display: flex;
+    flex: 5;
+    padding-left: 150px;
+    padding-top: 5px;
+    align-items: center;
+}
+
+#logo {
+    height: 100px;
+    margin-right: 15px;
+    width: auto;
+}
+
+#name {
+    color: white;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.side-page {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    background-color: #F1EADA;
+    flex: 2;
+    padding: 125px 25px;
+}
+
+#education {
+    width: 100%;
+}
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+}
+
+.data1, .data2, .data3, .data4, .data5, .data6 {
+    width: 350px;
+    padding: 20px;
+}
+
+input {
+    height: 30px;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    padding: 6px 10px;
+    outline: none;
+}
+
+input:focus {
+    border: 1px solid black;
+}
+
+.button-18 {
+    align-items: center;
+    background-color: #2E3E87;
+    border-radius: 100px;
+    display: inline-block;
+    justify-content: center;
+    line-height: 20px;
+    max-width: 480px;
+    min-height: 40px;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+}
+  
+.button-18:hover { 
+    background-color: #2A355C;
+    color: #ffffff;
+}
