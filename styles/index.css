@@ -5,6 +5,7 @@
     /* outline: 2px solid red; */
 }
 
+/* Styles for Header */
 .header {
     display: flex;
     height: 90px;
@@ -36,6 +37,7 @@
     flex: 1;
 }
 
+/* Style for Anchor Element */
 a {
     color: white;
     text-decoration: none;
@@ -44,6 +46,29 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* Style for Button */
+.button-18 {
+    align-items: center;
+    background-color: #2E3E87;
+    border-radius: 100px;
+    display: inline-block;
+    justify-content: center;
+    line-height: 20px;
+    max-width: 480px;
+    min-height: 40px;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+}
+  
+.button-18:hover { 
+    background-color: #2A355C;
+    color: #ffffff;
+}
+
+/* Styles for About Content */
 
 .about {
     display: flex;
@@ -56,26 +81,6 @@ a:hover {
 .description {
     text-align: center;
     flex: 1;
-}
-
-.button-18 {
-  align-items: center;
-  background-color: #2E3E87;
-  border-radius: 100px;
-  display: inline-block;
-  justify-content: center;
-  line-height: 20px;
-  max-width: 480px;
-  min-height: 40px;
-  padding: 0px;
-  padding-left: 20px;
-  padding-right: 20px;
-  text-align: center;
-}
-
-.button-18:hover { 
-  background-color: #2A355C;
-  color: #ffffff;
 }
 
 .side-picture {
@@ -97,10 +102,13 @@ a:hover {
     background-color: #F1EADA;
 }
 
+/* Styles for Hook Content */
+
 .hook {
     flex: 1;
 }
 
+/* Style for Subject Content */
 .subject {
     flex: 2;
     display: flex;
@@ -127,6 +135,7 @@ a:hover {
     margin-right: 10px;
 }
 
+/* Style for Footer */
 .footer {
     background-color: #2A355C;
     display: flex;
