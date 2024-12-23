@@ -24,6 +24,9 @@ function Navbar() {
         <Link to="/about">
           <h3 className="text-white hover:underline">About</h3>
         </Link>
+        <Link to="https://api.whatsapp.com/send?phone=6287831687797">
+          <h3 className="text-white hover:underline">Book</h3>
+        </Link>
         {/* <Link to="/account" className="text-white hover:underline"> */}
         <h3 className="text-white hover:underline">Account</h3>
         {/* </Link> */}
