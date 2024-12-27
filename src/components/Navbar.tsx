@@ -28,7 +28,7 @@ function Navbar() {
           <h3 className=" hover:underline">Courses</h3>
         </Link>
         <Link to="https://api.whatsapp.com/send?phone=6287831687797">
-          <h3 className=" hover:underline">Book  Now</h3>
+          <h3 className=" hover:underline">Book Now</h3>
         </Link>
         <Link to="/account" className=" hover:underline">
         <h3 className=" hover:underline">Hello, {user.name}</h3>
