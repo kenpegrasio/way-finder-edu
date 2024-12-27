@@ -1,0 +1,30 @@
+[33mcommit dbc904dc6f568888c148ca5354f245ea3102dbfd[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Vienenta Graciella <graciellavienenta@gmail.com>
+Date:   Fri Dec 27 20:26:48 2024 +0700
+
+    Revert "Add User Login Logout Feature using Google Auth (basic)"git log
+    
+    This reverts commit e27c5d6e06809f166dfeee2f110d9c466443a67f.
+    
+    ]\git logit logit logit log
+    
+    \
+    ]
+
+[33mcommit e27c5d6e06809f166dfeee2f110d9c466443a67f[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Jansen Ken Pegrasio <kenpegrasio@gmail.com>
+Date:   Mon Dec 23 23:19:41 2024 +0700
+
+    Add User Login Logout Feature using Google Auth (basic)
+
+[33mcommit afd9e5853aca45d9344c926f0c6e84a25d5965b2[m
+Author: Jansen Ken Pegrasio <kenpegrasio@gmail.com>
+Date:   Mon Dec 23 16:47:47 2024 +0700
+
+    Add Book feature
+
+[33mcommit 0c660950b8c295bf3fb236600798df27445c4994[m
+Author: Jansen Ken Pegrasio <kenpegrasio@gmail.com>
+Date:   Sat Dec 21 22:29:26 2024 +0700
+
+    init

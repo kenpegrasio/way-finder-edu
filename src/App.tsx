@@ -16,7 +16,7 @@ const subjects = [
     id: 1,
     name: "Physics",
     description:
-      "Kinematics, rotation,  thermodynamics, fluids, elasticity, waves, optics, electricity, magnetism field, relativity theory, quantum physics, etc.",
+      "Kinematics, rotation, thermodynamics, fluids, elasticity, waves, optics, electricity, magnetism field, relativity theory, quantum physics, etc.",
   },
   {
     id: 2,
@@ -54,21 +54,20 @@ const facilities = [
   },
 ];
 
-
 function App() {
   const { user } = useContext(UserContext) ?? { user: { email: "", name: "" } };
 
   return (
     <>
-    {!user.email ? <Navbar0 /> : <Navbar />}
+      {!user.email ? <Navbar0 /> : <Navbar />}
       <div className="relative flex flex-col w-380 h-256 pl-8 bg-customCream items-center justify-center md:flex-row -mt-2">
         <div className="absolute left-0 z-10 text-left md:flex-1 pl-20 mb-6">
           <h1 className="font-bold font-montserrat text-left text-8xl text-customDarkBlue -mt-5">
-            Elevate your<br/>
+            Elevate your<br />
             <span className="block -mt-5">academics</span>
           </h1>
           <p className="font-medium font-montserrat text-left text-3xl text-customBlack leading-8 mt-1">
-          Take your learning to the next level with<br/>in-depth resources, expert guidance, and<br/>strategies to achieve academic excellence.
+            Take your learning to the next level with<br />in-depth resources, expert guidance, and<br />strategies to achieve academic excellence.
           </p>
           <br />
           {!user.email ? (
@@ -80,7 +79,6 @@ function App() {
               <Link to="/courses">Get Started</Link>
             </button>
           )}
-
         </div>
         <div className="hidden lg:flex lg:items-center lg:justify-end lg:flex-[2] lg:h-full">
           <img src="./cover.png" className="object-fill" style={{ height: '512px' }} />
