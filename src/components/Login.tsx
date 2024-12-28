@@ -52,7 +52,7 @@ function Login() {
   return (
     <button
       onClick={handleButtonClick}
-      className="inline-block justify-center align-center text-center text-white bg-customLightBlue border border-black rounded-3xl px-5 min-h-10 hover:bg-white hover:text-customLightBlue hover:scale-110"
+      className="font-montserrat inline-block justify-center align-center text-center text-white bg-customLightBlue border border-black rounded-3xl px-5 min-h-10 hover:bg-white hover:text-customLightBlue hover:scale-110"
     >
       Login with Google
     </button>

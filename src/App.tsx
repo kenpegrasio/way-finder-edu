@@ -60,28 +60,30 @@ function App() {
   return (
     <>
       {!user.email ? <Navbar0 /> : <Navbar />}
-      <div className="relative flex flex-col w-380 h-256 pl-8 bg-customCream items-center justify-center md:flex-row -mt-2">
-        <div className="absolute left-0 z-10 text-left md:flex-1 pl-20 mb-6">
-          <h1 className="font-bold font-montserrat text-left text-8xl text-customDarkBlue -mt-5">
-            Elevate your<br />
-            <span className="block -mt-5">academics</span>
-          </h1>
-          <p className="font-medium font-montserrat text-left text-3xl text-customBlack leading-8 mt-1">
-            Take your learning to the next level with<br />in-depth resources, expert guidance, and<br />strategies to achieve academic excellence.
+      <div className="flex flex-col w-380 h-fit px-8 md:pr-0 bg-customCream items-center justify-center md:h-fit md:flex-row">
+        <div className="md:flex-1 my-6 p-10">
+          <div className="font-bold font-montserrat text-5xl md:text-8xl text-customDarkBlue -mt-5 leading-[1.1] mb-2">
+            Elevate your academics
+          </div>
+          <p className="text-lg font-montserrat md:text-3xl text-customBlack leading-8 mt-1">
+            Take your learning to the next level with in-depth resources, expert
+            guidance, and strategies to achieve academic excellence.
           </p>
           <br />
-          {!user.email ? (
-            <button className="inline-block justify-center align-center text-center text-customCream bg-customDarkBlue rounded-xl px-4 pt-2 pb-2 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:outline-1 hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold text-xl">
+          <button className="inline-block justify-center align-center text-center text-customCream bg-customDarkBlue rounded-xl px-4 pt-2 pb-2 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:outline-1 hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold text-sm md:text-xl">
+            {!user.email ? (
               <Link to="/account">Sign In</Link>
-            </button>
-          ) : (
-            <button className="inline-block justify-center align-center text-center text-customCream bg-customDarkBlue rounded-xl px-4 pt-2 pb-2 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:outline-1 hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold text-xl">
+            ) : (
               <Link to="/courses">Get Started</Link>
-            </button>
-          )}
+            )}
+          </button>
         </div>
         <div className="hidden lg:flex lg:items-center lg:justify-end lg:flex-[2] lg:h-full">
-          <img src="./cover.png" className="object-fill" style={{ height: '512px' }} />
+          <img
+            src="./cover.png"
+            className="object-fill"
+            style={{ height: "512px" }}
+          />
         </div>
       </div>
 
@@ -92,14 +94,19 @@ function App() {
             <h1 className="font-bold font-montserrat text-customCream text-5xl text-center mt-48 mb-4 pb-4">
               What Do We Teach?
             </h1>
-            <div className="grid grid-cols-2 gap-8 pt-6 mb-40 w-90 mx-auto pl-20 pr-14">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 mb-40 w-90 mx-auto pl-20 pr-14">
               {subjects.map((subject) => {
                 return (
                   <div
                     key={subject.id}
-                    className="flex flex-col w-full my-5 mx-2 justify-center align-center text-left">
-                    <h1 className="font-montserrat font-semibold text-3xl text-customCream mb-2">{subject.name}</h1>
-                    <p className="font-montserrat font-medium text-lg text-customCream">{subject.description}</p>
+                    className="flex flex-col w-full my-5 mx-2 justify-center align-center text-left"
+                  >
+                    <h1 className="font-montserrat font-semibold text-3xl text-customCream mb-2">
+                      {subject.name}
+                    </h1>
+                    <p className="font-montserrat font-medium text-lg text-customCream">
+                      {subject.description}
+                    </p>
                   </div>
                 );
               })}
@@ -110,7 +117,7 @@ function App() {
             <h1 className="font-bold font-montserrat text-customDarkBlue text-5xl text-center mt-12 mb-6">
               Facilities
             </h1>
-            <div className="grid grid-cols-2 gap-x-24 gap-y-10 w-90 mx-auto mt-6 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-10 w-90 mx-auto mt-6 mb-16">
               {facilities.map((facility) => (
                 <div
                   key={facility.id}

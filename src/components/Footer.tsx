@@ -1,6 +1,6 @@
 function Footer() {
     return (
-        <div className="flex items-center justify-center h-auto bg-customDarkBlue text-customCream">
+        <div className="flex items-center justify-center h-auto bg-customDarkBlue text-customCream border border-red-700 p-1">
             <div className="mt-12 flex flex-col items-center">
                 <div className="flex items-center -ml-4">
                     <img 
