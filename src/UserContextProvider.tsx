@@ -24,7 +24,6 @@ function UserContextProvider({ children }: UserContextProviderProps) {
 
   useEffect(() => {
     const storedUser = sessionStorage.getItem("user");
-    console.log("Stored User", storedUser);
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
