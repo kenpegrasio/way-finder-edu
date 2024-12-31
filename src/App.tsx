@@ -35,7 +35,7 @@ const facilities = [
   {
     id: 0,
     description: "Recorded sessions",
-    image: "/video-icon.svg",
+    image: "/public/video-icon.svg",
   },
   {
     id: 1,
