@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Navbar0 from "./components/Navbar0";
 import Footer from "./components/Footer";
 import { useContext } from "react";
 import { UserContext } from "./UserContextProvider";
@@ -59,7 +58,7 @@ function App() {
 
   return (
     <>
-      {!user.email ? <Navbar0 /> : <Navbar />}
+      <Navbar />
       {/* Hero Section */}
       <div className="flex flex-col w-full bg-customCream md:flex-row">
         <div className="text-left w-full px-6 py-6 mt-0 md:py-16 lg:-mx-3 lg:px-16 lg:pr-32   text-customDarkBlue flex-1">
