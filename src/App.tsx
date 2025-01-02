@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Navbar0 from "./components/Navbar0";
 import Footer from "./components/Footer";
 import { useContext } from "react";
 import { UserContext } from "./UserContextProvider";
@@ -10,7 +9,7 @@ const subjects = [
     id: 0,
     name: "Mathematics",
     description:
-      "Exponential, absolute, &  composition function, trigonometry, circles, 3D shape, probability, polynomials, binomial & normal distribution, etc.",
+      "Exponential, absolute, & composition function, trigonometry, circles, 3D shape, probability, polynomials, binomial & normal distribution, etc.",
   },
   {
     id: 1,
@@ -59,67 +58,105 @@ function App() {
 
   return (
     <>
-      {!user.email ? <Navbar0 /> : <Navbar />}
-      <div className="relative flex flex-col w-380 h-256 pl-8 bg-customCream items-center justify-center md:flex-row -mt-2">
-        <div className="absolute left-0 z-10 text-left md:flex-1 pl-20 mb-6">
-          <h1 className="font-bold font-montserrat text-left text-8xl text-customDarkBlue -mt-5">
-            Elevate your<br />
-            <span className="block -mt-5">academics</span>
+      <Navbar />
+      {/* Hero Section */}
+      <div className="flex flex-col w-full bg-customCream md:flex-row">
+        <div className="text-left w-full px-6 py-6 mt-0 md:py-16 lg:-mx-3 lg:px-16 lg:pr-32   text-customDarkBlue flex-1">
+          <h1 className="font-bold font-montserrat text-6xl md:text-9xl lg:text-7xl leading-tight">
+            <span className="block lg:inline">Elevate your</span>
+            <span className="block lg:mt-2">academics</span>
           </h1>
-          <p className="font-medium font-montserrat text-left text-3xl text-customBlack leading-8 mt-1">
-            Take your learning to the next level with<br />in-depth resources, expert guidance, and<br />strategies to achieve academic excellence.
+
+          {/* For Desktop only */}
+          <p className="hidden font-medium font-montserrat text-lg md:text-2xl lg:text-3xl lg:max-w-144 text-customBlack mt-4 md:block">
+            Take your learning to the next level with in-depth resources, expert
+            guidance, and strategies to achieve academic excellence.
+          </p>
+          <br className="hidden md:block" />
+          <div className="hidden md:block">
+            {!user.email ? (
+              <button className="inline-block text-customCream bg-customDarkBlue rounded-[0.75rem] px-4 py-2 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold md:text-lg lg:text-[1.3rem] lg:-mt-1">
+                <Link to="/account">Sign In</Link>
+              </button>
+            ) : (
+              <button className="inline-block text-customCream bg-customDarkBlue rounded-xl px-6 py-3 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold text-lg md:text-xl">
+                <Link to="/courses">Get Started</Link>
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Image Content */}
+
+        <img
+          src="./cover.png"
+          className="flex-[2] max-h-[40rem] object-contain"
+          alt="Cover"
+        />
+
+        {/* Text Content */}
+        <div className="md:hidden text-left w-full px-6 pt-2 pb-8 md:py-0 lg:-mx-3 lg:px-16 lg:pr-32 lg:-mt-2 text-customDarkBlue">
+          <p className="font-medium font-montserrat text-lg md:text-2xl lg:text-3xl lg:max-w-144 text-customBlack mt-4">
+            Take your learning to the next level with in-depth resources, expert
+            guidance, and strategies to achieve academic excellence.
           </p>
           <br />
           {!user.email ? (
-            <button className="inline-block justify-center align-center text-center text-customCream bg-customDarkBlue rounded-xl px-4 pt-2 pb-2 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:outline-1 hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold text-xl">
+            <button className="inline-block text-customCream bg-customDarkBlue rounded-[0.75rem] px-4 py-2 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold md:text-lg lg:text-[1.3rem] lg:-mt-1">
               <Link to="/account">Sign In</Link>
             </button>
           ) : (
-            <button className="inline-block justify-center align-center text-center text-customCream bg-customDarkBlue rounded-xl px-4 pt-2 pb-2 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:outline-1 hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold text-xl">
+            <button className="inline-block text-customCream bg-customDarkBlue rounded-xl px-6 py-3 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold text-lg md:text-xl">
               <Link to="/courses">Get Started</Link>
             </button>
           )}
-        </div>
-        <div className="hidden lg:flex lg:items-center lg:justify-end lg:flex-[2] lg:h-full">
-          <img src="./cover.png" className="object-fill" style={{ height: '512px' }} />
         </div>
       </div>
 
       {/* After Login */}
       {user.email && (
         <>
-          <div className="flex flex-col items-center justify-center bg-customDarkBlue">
-            <h1 className="font-bold font-montserrat text-customCream text-5xl text-center mt-48 mb-4 pb-4">
+          {/* Subjects Section */}
+          <div className="flex flex-col items-center justify-center bg-customDarkBlue py-12 lg:py-20">
+            <h1 className="font-bold font-montserrat text-customCream text-3xl md:text-4xl lg:text-5xl text-center mb-8">
               What Do We Teach?
             </h1>
-            <div className="grid grid-cols-2 gap-8 pt-6 mb-40 w-90 mx-auto pl-20 pr-14">
-              {subjects.map((subject) => {
-                return (
-                  <div
-                    key={subject.id}
-                    className="flex flex-col w-full my-5 mx-2 justify-center align-center text-left">
-                    <h1 className="font-montserrat font-semibold text-3xl text-customCream mb-2">{subject.name}</h1>
-                    <p className="font-montserrat font-medium text-lg text-customCream">{subject.description}</p>
-                  </div>
-                );
-              })}
+            <div className="grid grid-cols-1 gap-6 px-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-12 w-full max-w-7xl">
+              {subjects.map((subject) => (
+                <div
+                  key={subject.id}
+                  className="flex flex-col text-left p-6 bg-customCream rounded-lg shadow-md"
+                >
+                  <h1 className="font-montserrat font-semibold text-xl md:text-2xl lg:text-3xl text-customDarkBlue mb-2">
+                    {subject.name}
+                  </h1>
+                  <p className="font-montserrat font-medium text-sm md:text-base lg:text-lg text-customBlack">
+                    {subject.description}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center bg-customCream py-20">
-            <h1 className="font-bold font-montserrat text-customDarkBlue text-5xl text-center mt-12 mb-6">
+          {/* Facilities Section */}
+          <div className="flex flex-col items-center justify-center bg-customCream py-12 lg:py-20">
+            <h1 className="font-bold font-montserrat text-customDarkBlue text-3xl md:text-4xl lg:text-5xl text-center mb-8">
               Facilities
             </h1>
-            <div className="grid grid-cols-2 gap-x-24 gap-y-10 w-90 mx-auto mt-6 mb-16">
+            <div className="grid grid-cols-1 gap-8 px-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 w-full max-w-7xl">
               {facilities.map((facility) => (
                 <div
                   key={facility.id}
-                  className="flex flex-col items-center px-4 text-center">
+                  className="flex flex-col items-center text-center"
+                >
                   <img
                     src={facility.image}
-                    className="w-20 h-20 rounded-md mb-2"
+                    className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mb-4"
+                    alt={facility.description}
                   />
-                  <p className="text-customBlack font-montserrat font-medium text-2xl mb-2">{facility.description}</p>
+                  <p className="font-montserrat font-medium text-lg lg:text-xl text-customBlack">
+                    {facility.description}
+                  </p>
                 </div>
               ))}
             </div>

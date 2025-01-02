@@ -8,16 +8,20 @@ function Footer() {
                         alt="Logo" 
                         className="h-24 mr-2"
                     />
-                    <p className="font-montserrat font-semibold text-customCream text-4xl mt-3">Way Finder Edu</p>
+                    <p className="font-montserrat font-semibold text-customCream text-4xl mt-3">
+                        Way Finder Edu
+                    </p>
                 </div>
-                <p className="font-montserrat font-medium text-customCream text-2xl text-center -mt-1">Everything is possible if we find a way.</p>
+                <p className="font-montserrat font-medium text-customCream text-2xl text-center -mt-1">
+                    Everything is possible if we find a way.
+                </p>
                 <div className="flex items-center mt-7 mb-7 gap-x-8">
                     <a href="mailto:wayfinderedu.official@gmail.com" target="_blank" rel="noopener noreferrer">
                         <img
-                                src="/mail.svg"
-                                alt="Email"
-                                className="h-10 cursor-pointer"
-                            /> 
+                            src="/mail.svg"
+                            alt="Email"
+                            className="h-10 cursor-pointer"
+                        />
                     </a>
                     <a href="https://wa.me/6287831687797" target="_blank" rel="noopener noreferrer">
                         <img
@@ -34,7 +38,9 @@ function Footer() {
                         />
                     </a>
                 </div>
-                <p className="font-montserrat font-medium text-customCream text-md text-center mb-16">© 2024 Way Finder Edu. All Rights Reserved.</p>
+                <p className="font-montserrat font-medium text-customCream text-md text-center mb-16">
+                    © 2024 Way Finder Edu. All Rights Reserved.
+                </p>
             </div>
         </div>
     );
