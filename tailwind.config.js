@@ -19,7 +19,9 @@ export default {
         montserrat: ['Montserrat', 'sans-serif'],
       },
       fontSize: {
-        '8xl': '4.5rem',
+        '8xl': '5rem',
+        '7xl': '4.5rem',
+        '6xl': '3rem',
         '5xl': '2rem',
         '4xl': '1.75rem',
         '3xl': '1.5rem',
@@ -28,6 +30,14 @@ export default {
         'lg': '1rem',
         'md': '0.9rem',
       },
+      height: {
+        '128': '32rem',
+        '144': '36rem',
+      },
+      maxWidth: {
+        '128': '32rem',
+        '144': '36rem',
+      }
     },
   },
   plugins: [],

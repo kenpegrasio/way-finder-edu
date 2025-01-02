@@ -5,7 +5,7 @@ import {UserContext} from "../UserContextProvider";
 function Navbar() {
   const { user } = useContext(UserContext) ?? { user: { name: "", email: "", picture: "" } };
   return (
-    <nav className="sticky top-0 flex flex-col bg-customCream items-center py-4 md:flex-row md:h-auto md:gap-4 md:pl-10 shadow-customDarkBlue" >
+    <nav className="sticky z-10 top-0 flex flex-col bg-customCream items-center py-4 md:flex-row md:h-auto md:gap-4 md:pl-10 shadow-customDarkBlue" >
       <div className="flex items-center md:justify-center md:flex-none">
         <Link to="/">
           <img
