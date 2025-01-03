@@ -29,6 +29,8 @@ export default {
         'xl': '1.1rem',
         'lg': '1rem',
         'md': '0.9rem',
+        'sm': '0.75rem',
+        'xs': '0.7rem',
       },
       height: {
         '128': '32rem',

@@ -61,14 +61,14 @@ function App() {
       <Navbar />
       {/* Hero Section */}
       <div className="flex flex-col w-full bg-customCream md:flex-row">
-        <div className="text-left w-full px-6 py-6 mt-0 md:py-16 lg:-mx-3 lg:px-16 lg:pr-32   text-customDarkBlue flex-1">
+        <div className="text-left w-full px-6 py-6 mt-0 md:py-16 lg:-mx-3 lg:px-24 lg:pr-12 text-customDarkBlue flex-1 ">
           <h1 className="font-bold font-montserrat text-6xl md:text-9xl lg:text-7xl leading-tight">
-            <span className="block lg:inline">Elevate your</span>
+            <span className="block lg:whitespace-nowrap lg:inline">Elevate your</span>
             <span className="block lg:mt-2">academics</span>
           </h1>
 
           {/* For Desktop only */}
-          <p className="hidden font-medium font-montserrat text-lg md:text-2xl lg:text-3xl lg:max-w-144 text-customBlack mt-4 md:block">
+          <p className="hidden font-medium font-montserrat text-lg md:text-2xl lg:text-3xl lg:max-w-144 text-customBlack mt-4 md:block outlin">
             Take your learning to the next level with in-depth resources, expert
             guidance, and strategies to achieve academic excellence.
           </p>
@@ -79,7 +79,7 @@ function App() {
                 <Link to="/account">Sign In</Link>
               </button>
             ) : (
-              <button className="inline-block text-customCream bg-customDarkBlue rounded-xl px-6 py-3 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold text-lg md:text-xl">
+              <button className="inline-block text-customCream bg-customDarkBlue rounded-[0.75rem] px-4 py-2 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold md:text-lg lg:text-[1.3rem] lg:-mt-1">
                 <Link to="/courses">Get Started</Link>
               </button>
             )}
@@ -87,15 +87,14 @@ function App() {
         </div>
 
         {/* Image Content */}
-
         <img
           src="./cover.png"
-          className="flex-[2] max-h-[40rem] object-contain"
+          className="flex-[2] max-h-[32rem] object-contain"
           alt="Cover"
         />
 
         {/* Text Content */}
-        <div className="md:hidden text-left w-full px-6 pt-2 pb-8 md:py-0 lg:-mx-3 lg:px-16 lg:pr-32 lg:-mt-2 text-customDarkBlue">
+        <div className="md:hidden text-left w-full px-6 pt-2 pb-8 md:py-0 lg:-mx-3 lg:-mt-2 text-customDarkBlue">
           <p className="font-medium font-montserrat text-lg md:text-2xl lg:text-3xl lg:max-w-144 text-customBlack mt-4">
             Take your learning to the next level with in-depth resources, expert
             guidance, and strategies to achieve academic excellence.
@@ -106,7 +105,7 @@ function App() {
               <Link to="/account">Sign In</Link>
             </button>
           ) : (
-            <button className="inline-block text-customCream bg-customDarkBlue rounded-xl px-6 py-3 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold text-lg md:text-xl">
+            <button className="inline-block text-customCream bg-customDarkBlue rounded-[0.75rem] px-4 py-2 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold md:text-lg lg:text-[1.3rem] lg:-mt-1">
               <Link to="/courses">Get Started</Link>
             </button>
           )}
@@ -121,16 +120,16 @@ function App() {
             <h1 className="font-bold font-montserrat text-customCream text-3xl md:text-4xl lg:text-5xl text-center mb-8">
               What Do We Teach?
             </h1>
-            <div className="grid grid-cols-1 gap-6 px-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-12 w-full max-w-7xl">
+            <div className="grid grid-cols-1 gap-6 px-6 py-2 md:grid-cols-2 lg:grid-cols-2 lg:gap-12 lg:px-24 lg:py-6 w-full max-w-7xl">
               {subjects.map((subject) => (
                 <div
                   key={subject.id}
-                  className="flex flex-col text-left p-6 bg-customCream rounded-lg shadow-md"
+                  className="flex flex-col text-left"
                 >
-                  <h1 className="font-montserrat font-semibold text-xl md:text-2xl lg:text-3xl text-customDarkBlue mb-2">
+                  <h1 className="font-montserrat font-semibold text-xl md:text-2xl lg:text-3xl text-customCream mb-2">
                     {subject.name}
                   </h1>
-                  <p className="font-montserrat font-medium text-sm md:text-base lg:text-lg text-customBlack">
+                  <p className="font-montserrat font-medium text-sm md:text-base lg:text-lg text-customCream">
                     {subject.description}
                   </p>
                 </div>
@@ -143,7 +142,7 @@ function App() {
             <h1 className="font-bold font-montserrat text-customDarkBlue text-3xl md:text-4xl lg:text-5xl text-center mb-8">
               Facilities
             </h1>
-            <div className="grid grid-cols-1 gap-8 px-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 w-full max-w-7xl">
+            <div className="grid grid-cols-1 gap-8 px-6 py-2 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 lg:px-12 lg:py-6 w-full max-w-7xl">
               {facilities.map((facility) => (
                 <div
                   key={facility.id}
