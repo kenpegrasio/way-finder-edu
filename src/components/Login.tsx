@@ -8,16 +8,12 @@ function Login() {
   const userContext = useContext(UserContext);
 
   if (!userContext) {
-    throw new Error(
-      "UserContext is not provided."
-    );
+    throw new Error("UserContext is not provided.");
   }
 
   const { setUser } = userContext;
 
-  const handleLoginSuccess = async (tokenResponse: {
-    access_token: string;
-  }) => {
+  const handleLoginSuccess = async (tokenResponse: { access_token: string }) => {
     console.log("Login Success!", tokenResponse);
     try {
       const { data: userProfile } = await axios.get(
@@ -50,13 +46,23 @@ function Login() {
   };
 
   return (
-    <button
-      onClick={handleButtonClick}
-      className="inline-block justify-center align-center text-center text-white bg-customLightBlue border border-black rounded-3xl px-5 min-h-10 hover:bg-white hover:text-customLightBlue hover:scale-110"
-    >
-      Login with Google
-    </button>
-  );
+    <div className="flex flex-col items-center justify-center bg-customCream  lg:px-3 lg:py-16 lg:pb-24 lg:rounded-[2.5rem]">
+      <p className="text-lg font-montserrat font-bold text-customDarkBlue lg:text-[2.5rem] lg:pb-12">
+        Sign In
+      </p>
+      <button
+        onClick={handleButtonClick}
+        className="flex items-center justify-center text-center text-customCream bg-customDarkBlue rounded-xl px-5 py-3 font-montserrat font-medium lg:text-2xl transition-transform duration-100 hover:text-customDarkBlue hover:bg-customCream hover:outline hover:outline-2 hover:outline-customDarkBlue hover:scale-105"
+      >
+        <img
+          src="/google-logo.svg"
+          alt="Google"
+          className="w-8 h-8 mr-2"
+        />
+        Sign In with Google
+      </button>
+    </div>
+  );  
 }
 
 export default Login;
