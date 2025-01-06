@@ -84,7 +84,7 @@ function Courses() {
         <p className="text-center text-customDarkBlue font-montserrat font-semibold text-xl pb-3 md:text-xl lg:text-4xl lg:pb-5">
           Private
         </p>
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 pb-5 lg:gap-8 lg:px-36 lg:pb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-2 pb-5 lg:gap-5 lg:px-[4.5rem] lg:pb-8">
           {privateCourses.map((course, index) => (
             <div
               key={index}
