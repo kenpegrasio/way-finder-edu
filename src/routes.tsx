@@ -3,6 +3,7 @@ import Courses from "./pages/Courses";
 import About from "./pages/About";
 import Account from "./pages/Account";
 import BookNow from "./pages/BookNow";
+import NotFound from "./pages/NotFound";
 
 const routes = [
     {
@@ -24,6 +25,10 @@ const routes = [
     {
         path: "/book-now",
         element: <BookNow />
+    },
+    {
+        path: "*",
+        element: <NotFound />
     }
 ]
 
