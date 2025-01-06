@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { useContext } from "react";
+import { UserContext } from "../UserContextProvider";
 
 function Courses() {
   const semiPrivateCourses = [
@@ -43,6 +45,20 @@ function Courses() {
       description: "Free to choose any subjects\nFree reschedule 4x",
     },
   ];
+
+  const context = useContext(UserContext);
+
+  if (!context) {
+    throw new Error("UserContext must be used within a UserContextProvider");
+  }
+
+  const { user } = context;
+
+  const isUserEmpty = !user || (!user.picture && !user.name && !user.email);
+
+  if (isUserEmpty) {
+    window.location.href = "/";
+  }
 
   return (
     <>
