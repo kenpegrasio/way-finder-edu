@@ -2,6 +2,7 @@ import App from "./App";
 import Courses from "./pages/Courses";
 import About from "./pages/About";
 import Account from "./pages/Account";
+import BookNow from "./pages/BookNow";
 
 const routes = [
     {
@@ -19,6 +20,10 @@ const routes = [
     {
         path: "/account",
         element: <Account />
+    },
+    {
+        path: "/book-now",
+        element: <BookNow />
     }
 ]
 
