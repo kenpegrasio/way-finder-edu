@@ -13,7 +13,7 @@ function Navbar() {
           <img
             src="/logo-dark.svg"
             alt="Logo"
-            className="ml-9 -mt-2 h-16 w-16 mr-2"
+            className="-mt-2 h-16 w-16 mr-2 md:ml-9"
           />
         </Link>
         <h1 className="text-customDarkBlue font-montserrat font-semibold text-2xl md:text-center">
