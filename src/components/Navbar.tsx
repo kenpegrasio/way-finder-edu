@@ -7,13 +7,13 @@ function Navbar() {
     user: { name: "", email: "", picture: "" },
   };
   return (
-    <nav className="sticky z-50 top-0 flex flex-col bg-customCream items-center py-4 md:flex-row md:h-auto md:gap-4 md:pl-10 shadow-customDarkBlue">
+    <nav className="sticky z-50 flex flex-col bg-customCream items-center py-4 md:flex-row md:h-auto md:gap-4 md:pl-10 shadow-customDarkBlue">
       <div className="flex items-center md:justify-center md:flex-none">
         <Link to="/">
           <img
             src="/logo-dark.svg"
             alt="Logo"
-            className="ml-9 -mt-2 h-16 w-16 mr-2 rounded-full "
+            className="ml-9 -mt-2 h-16 w-16 mr-2"
           />
         </Link>
         <h1 className="text-customDarkBlue font-montserrat font-semibold text-2xl md:text-center">
@@ -32,7 +32,7 @@ function Navbar() {
           <Link to="/courses">
             <h3 className=" hover:underline">Courses</h3>
           </Link>
-          <Link to="https://api.whatsapp.com/send?phone=6287831687797">
+          <Link to="/book-now">
             <h3 className=" hover:underline">Book Now</h3>
           </Link>
           <Link to="/account" className=" hover:underline">
