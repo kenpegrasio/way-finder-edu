@@ -89,7 +89,7 @@ function App() {
         {/* Image Content */}
         <img
           src="./cover.png"
-          className="flex-[2] max-h-[32rem] object-contain"
+          className="flex-[2] max-h-[32rem] object-cover"
           alt="Cover"
         />
 
