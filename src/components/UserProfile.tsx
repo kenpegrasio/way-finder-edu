@@ -1,9 +1,10 @@
-import Login from "./Login.tsx";
-import Logout from "./Logout.tsx";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 import { useContext } from "react";
-import { UserContext } from "../UserContextProvider.tsx";
+import { UserContext } from "../UserContextProvider";
+import Logout from "./Logout";
 
-function UserInfo() {
+function UserProfile() {
   const context = useContext(UserContext);
 
   if (!context) {
@@ -11,20 +12,9 @@ function UserInfo() {
   }
 
   const user = context;
-
-  if (JSON.stringify(user.user) === JSON.stringify({ picture: '', name: '', email: '' })) {
-    return (
-      <div className="flex flex-col align-center justify-center text-center bg-customWhite h-screen p-24 bg-customCream">
-        <h1 className="text-2xl font-bold">User Information</h1>
-        <br />
-        <p>Not registered yet</p> <br />
-        <div>
-          <Login />
-        </div>
-      </div>
-    );
-  } else {
-    return (
+  return (
+    <>
+      <Navbar />
       <div className="h-screen bg-customCream">
         <div className="flex flex-col align-center justify-center text-center bg-customWhite h-4/5 p-24">
           <h1 className="text-2xl font-bold py-5">User Information</h1>
@@ -42,13 +32,12 @@ function UserInfo() {
             <strong>Email:</strong> {user.user.email}
           </p>
           <br />
-          <div>
-            <Logout />
-          </div>
+          <Logout />
         </div>
       </div>
-    );
-  }
+      <Footer />
+    </>
+  );
 }
 
-export default UserInfo;
+export default UserProfile;
