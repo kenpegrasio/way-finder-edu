@@ -25,9 +25,9 @@ function Logout() {
   return (
     <button
       onClick={handleLogout}
-      className="inline-block justify-center align-center text-center text-white bg-customLightBlue border border-black rounded-3xl px-5 min-h-10 hover:bg-white hover:text-customLightBlue hover:scale-110"
+      className="font-montserrat font-semibold text-center text-customCream bg-customDarkBlue border border-customDarkBlue text-2xl rounded-md px-3 py-1 md:rounded-lg lg:rounded-lg md:text-2xl lg:text-2xl md:px-4 lg:px-4 md:py-2 lg:py-2 hover:bg-customCream hover:text-customDarkBlue hover:scale-105"
     >
-      Logout
+      Sign Out
     </button>
   );
 }
