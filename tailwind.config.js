@@ -15,6 +15,7 @@ export default {
       boxShadow: {
         customDarkBlue: "0 2px 10px -2px rgba(41, 51, 92, 0.2)",
         customCoursesContainer: "0 0px 5px -1px rgba(41, 51, 92, 0.5)",
+        customLoginContainer: "0 0px 20px -1px rgba(24, 24, 24, 0.5)",
       },
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif'],

@@ -46,13 +46,13 @@ function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-customCream  lg:px-3 lg:py-16 lg:pb-24 lg:rounded-[2.5rem]">
-      <p className="text-lg font-montserrat font-bold text-customDarkBlue lg:text-[2.5rem] lg:pb-12">
+    <div className="flex flex-col items-center justify-center bg-customCream shadow-customLoginContainer pt-20 pb-[6.5rem] rounded-[2rem] lg:px-3 lg:pt-16 lg:pb-24 lg:rounded-[2.5rem]">
+      <p className="font-montserrat font-bold text-customDarkBlue text-[2.5rem] pb-10 lg:text-[2.5rem] lg:pb-12">
         Sign In
       </p>
       <button
         onClick={handleButtonClick}
-        className="flex items-center justify-center text-center text-customCream bg-customDarkBlue rounded-xl px-5 py-3 font-montserrat font-medium lg:text-2xl transition-transform duration-100 hover:text-customDarkBlue hover:bg-customCream hover:outline hover:outline-2 hover:outline-customDarkBlue hover:scale-105"
+        className="flex items-center justify-center text-center text-customCream bg-customDarkBlue rounded-xl px-5 py-3 font-montserrat font-medium text-2xl lg:text-2xl transition-transform duration-100 hover:text-customDarkBlue hover:bg-customCream hover:outline hover:outline-2 hover:outline-customDarkBlue hover:scale-105"
       >
         <img
           src="/google-logo.svg"
