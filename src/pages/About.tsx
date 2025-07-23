@@ -22,17 +22,17 @@ function About() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col md:flex-row items-center justify-center pt-32 pb-8 px-10 md:pt-40 bg-customCream">
+      <div className="flex flex-col md:flex-row items-center justify-center pt-32 pb-8 px-10 md:pt-40 bg-custom-cream">
         <img
           src="/logo-dark.svg"
           alt="Logo"
           className="h-128 w-auto mx-5 -my-28 -mb-32"
         />
         <div className="flex flex-col items-start justify-center text-left">
-          <div className="font-montserrat leading-tight text-customDarkBlue text-5xl md:text-7xl font-bold py-3 md:pe-28 whitespace-pre-line">
+          <div className="font-montserrat leading-tight text-custom-dark-blue text-5xl md:text-7xl font-bold py-3 md:pe-28 whitespace-pre-line">
             {text}
           </div>
-          <div className="font-montserrat text-customBlack text-xl md:text-3xl font-medium pt-2 pb-12 md:pe-28">
+          <div className="font-montserrat text-custom-black text-xl md:text-3xl font-medium pt-2 pb-12 md:pe-28">
             Way Finder Edu is an online tutoring institution that
             provides various classes for high school level Mathematics,
             Physics, Chemistry and Informatics subjects. All of our
@@ -40,20 +40,20 @@ function About() {
           </div>
         </div>
       </div>
-      <div className="bg-customDarkBlue h-fit md:h-screen py-20 flex flex-col items-center justify-center">
-        <div className="text-3xl md:text-4xl font-bold font-montserrat text-customCream text-center">
+      <div className="bg-custom-dark-blue h-fit md:h-screen py-20 flex flex-col items-center justify-center">
+        <div className="text-3xl md:text-4xl font-bold font-montserrat text-custom-cream text-center">
           Vision
         </div>
-        <div className="text-left text-md md:text-xl font-montserrat text-customCream px-8 py-5 md:px-60">
+        <div className="text-left text-md md:text-xl font-montserrat text-custom-cream px-8 py-5 md:px-60">
           "To be an agent of change in Indonesian education by inspiring
           children to love science and learn happily. Therefore, they
           become creative, open-minded individuals, who are ready to face
           future challenges." 
         </div>
-        <div className="text-3xl md:text-4xl font-bold font-montserrat text-customCream text-center pt-8 md:pt-16">
+        <div className="text-3xl md:text-4xl font-bold font-montserrat text-custom-cream text-center pt-8 md:pt-16">
           Mission
         </div>
-        <div className="text-md md:text-xl font-montserrat text-customCream pt-5 pl-12 pr-8 md:pl-64 md:pr-60">
+        <div className="text-md md:text-xl font-montserrat text-custom-cream pt-5 pl-12 pr-8 md:pl-64 md:pr-60">
           <ol className="list-decimal">
             <li>
               Presenting teachers who are experienced, highly qualified and
@@ -70,11 +70,11 @@ function About() {
           </ol>
         </div>
       </div>
-      {/* <div className="bg-customCream h-screen flex flex-col items-center justify-center">
-        <div className="font-montserrat font-bold text-6xl text-center text-customBlack">
+      {/* <div className="bg-custom-cream h-screen flex flex-col items-center justify-center">
+        <div className="font-montserrat font-bold text-6xl text-center text-custom-black">
           Our Team
         </div>
-        <div className="font-montserrat text-4xl text-center text-customBlack py-32">
+        <div className="font-montserrat text-4xl text-center text-custom-black py-32">
           (Coming Soon)
         </div>
       </div> */}

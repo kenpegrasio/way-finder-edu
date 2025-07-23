@@ -52,7 +52,7 @@ function UpdateMeeting() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-customCream">
+    <div className="flex flex-col items-center justify-center h-screen bg-custom-cream">
       <h1 className="text-3xl font-bold mb-3">Update Meeting Info</h1>
       <form
         onSubmit={handleSubmit}
@@ -99,7 +99,7 @@ function UpdateMeeting() {
         </div>
         <button
           type="submit"
-          className="flex items-center justify-center text-center text-customCream bg-customDarkBlue rounded-xl px-5 py-3 font-montserrat font-medium text-2xl lg:text-2xl transition-transform duration-100 hover:text-customDarkBlue hover:bg-customCream hover:outline hover:outline-2 hover:outline-customDarkBlue hover:scale-105"
+          className="flex items-center justify-center text-center text-custom-cream bg-custom-dark-blue rounded-xl px-5 py-3 font-montserrat font-medium text-2xl lg:text-2xl transition-transform duration-100 hover:text-custom-dark-blue hover:bg-custom-cream hover:outline-solid hover:outline-2 hover:outline-custom-dark-blue hover:scale-105"
         >
           Submit
         </button>

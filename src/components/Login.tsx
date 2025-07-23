@@ -1,86 +1,97 @@
-import { useContext } from "react";
-import { useGoogleLogin } from "@react-oauth/google";
-import { UserContext } from "../UserContextProvider";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import axios from "axios";
-import React from "react";
 
-function Login() {
-  const userContext = useContext(UserContext);
+export default function Login() {
+  const [form, setForm] = useState({
+    emailOrUsername: "",
+    password: "",
+  });
 
-  if (!userContext) {
-    throw new Error("UserContext is not provided.");
-  }
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const { setUser } = userContext;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-  const handleLoginSuccess = async (tokenResponse: {
-    access_token: string;
-  }) => {
-    console.log("Login Success!", tokenResponse);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
     try {
-      const { data: userProfile } = await axios.get(
-        "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",
-        {
-          headers: {
-            Authorization: `Bearer ${tokenResponse.access_token}`,
-          },
-        }
-      );
-      console.log("user profile: ", userProfile.id);
+      const res = await axios.post("http://localhost:8000/api/user/login", {
+        emailOrUsername: form.emailOrUsername,
+        password: form.password,
+      });
 
-      const user = await axios.get(
-        `https://way-finder-edu-api.vercel.app/api/user/${userProfile.id}`
-      );
-
-      console.log("user.data: ", user.data)
-
-      if (Object.keys(user.data).length === 0) {
-        await axios
-          .post(`https://way-finder-edu-api.vercel.app/api/user/`, {
-            name: userProfile.name,
-            email: userProfile.email,
-            google_id: userProfile.id,
-          })
-          .then((res) => {
-            console.log(res.data);
-            sessionStorage.setItem("user", JSON.stringify(res.data));
-            setUser(res.data);
-          });
-      } else {
-        sessionStorage.setItem("user", JSON.stringify(user.data));
-        setUser(user.data);
-      }
-    } catch (error) {
-      console.error("Failed to fetch user profile", error);
+      console.log("Login successful", res.data);
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Login failed.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const login = useGoogleLogin({
-    onSuccess: handleLoginSuccess,
-    onError: (error) => {
-      console.error("Login Failed", error);
-    },
-  });
-
-  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    login();
-  };
-
   return (
-    <div className="flex flex-col items-center justify-center bg-customCream shadow-customLoginContainer pt-20 pb-[6.5rem] rounded-[2rem] lg:px-3 lg:pt-16 lg:pb-24 lg:rounded-[2.5rem]">
-      <p className="font-montserrat font-bold text-customDarkBlue text-[2.5rem] pb-10 lg:text-[2.5rem] lg:pb-12">
+    <div className="bg-custom-cream shadow-xl rounded-[2rem] px-12 py-16 w-full max-w-md mx-auto">
+      <h2 className="text-5xl font-bold text-custom-dark-blue mb-10 text-center font-montserrat">
         Sign In
-      </p>
-      <button
-        onClick={handleButtonClick}
-        className="flex items-center justify-center text-center text-customCream bg-customDarkBlue rounded-xl px-5 py-3 font-montserrat font-medium text-2xl lg:text-2xl transition-transform duration-100 hover:text-customDarkBlue hover:bg-customCream hover:outline hover:outline-2 hover:outline-customDarkBlue hover:scale-105"
-      >
-        <img src="/google-logo.svg" alt="Google" className="w-8 h-8 mr-2" />
-        Sign In with Google
-      </button>
+      </h2>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="text-left space-y-2">
+          <Label
+            htmlFor="emailOrUsername"
+            className="text-custom-dark-blue font-montserrat text-lg font-semibold"
+          >
+            Email or Username
+          </Label>
+          <Input
+            id="emailOrUsername"
+            name="emailOrUsername"
+            type="text"
+            value={form.emailOrUsername}
+            onChange={handleChange}
+            className="bg-white/70 text-custom-dark-blue border border-custom-dark-blue placeholder:text-custom-dark-blue/50 focus-visible:ring-custom-dark-blue"
+            placeholder="Enter your email or username"
+          />
+        </div>
+
+        <div className="text-left space-y-2">
+          <Label
+            htmlFor="password"
+            className="text-custom-dark-blue font-montserrat font-semibold text-lg"
+          >
+            Password
+          </Label>
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            value={form.password}
+            onChange={handleChange}
+            className="bg-white/70 text-custom-dark-blue border border-custom-dark-blue placeholder:text-custom-dark-blue/50 focus-visible:ring-custom-dark-blue"
+            placeholder="Enter your password"
+          />
+        </div>
+
+        {error && (
+          <p className="text-red-500 text-md font-montserrat text-center">
+            {error}
+          </p>
+        )}
+
+        <Button
+          type="submit"
+          disabled={loading}
+          className="text-lg w-full bg-custom-dark-blue text-custom-cream font-semibold font-montserrat hover:bg-custom-dark-blue/90 transition-all"
+        >
+          {loading ? "Logging in..." : "Login"}
+        </Button>
+      </form>
     </div>
   );
 }
-
-export default Login;

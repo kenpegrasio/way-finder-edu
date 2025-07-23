@@ -77,8 +77,8 @@ function Meetings() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center pt-28 pb-6 bg-customCream">
-        <h1 className="text-center text-customBlack font-montserrat font-bold text-3xl pb-2 md:text-5xl lg:text-[2.5rem] lg:pb-4">
+      <div className="flex flex-col items-center justify-center pt-28 pb-6 bg-custom-cream">
+        <h1 className="text-center text-custom-black font-montserrat font-bold text-3xl pb-2 md:text-5xl lg:text-[2.5rem] lg:pb-4">
           Your Meetings
         </h1>
         {meetings.length ? (
@@ -185,7 +185,7 @@ function Meetings() {
         {user.accesstype === "Admin" ? (
           <button
             onClick={addMeetingIsClicked}
-            className="my-4 flex items-center justify-center text-center text-customCream bg-customDarkBlue rounded-xl px-5 py-3 font-montserrat font-medium text-2xl lg:text-2xl transition-transform duration-100 hover:text-customDarkBlue hover:bg-customCream hover:outline hover:outline-2 hover:outline-customDarkBlue hover:scale-105"
+            className="my-4 flex items-center justify-center text-center text-custom-cream bg-custom-dark-blue rounded-xl px-5 py-3 font-montserrat font-medium text-2xl lg:text-2xl transition-transform duration-100 hover:text-custom-dark-blue hover:bg-custom-cream hover:outline-solid hover:outline-2 hover:outline-custom-dark-blue hover:scale-105"
           >
             Add Meeting
           </button>

@@ -67,7 +67,7 @@ function AddMeeting({ onClose }: AddMeetingProps) {
           <label className="flex flex-col">
             Teacher:
             <input
-              className="mt-1 px-3 py-2 rounded border border-gray-300"
+              className="mt-1 px-3 py-2 rounded-sm border border-gray-300"
               type="text"
               name="teacher"
               value={inputs.teacher}
@@ -77,7 +77,7 @@ function AddMeeting({ onClose }: AddMeetingProps) {
           <label className="flex flex-col">
             Student:
             <input
-              className="mt-1 px-3 py-2 rounded border border-gray-300"
+              className="mt-1 px-3 py-2 rounded-sm border border-gray-300"
               type="text"
               name="student"
               value={inputs.student}
@@ -87,7 +87,7 @@ function AddMeeting({ onClose }: AddMeetingProps) {
           <label className="flex flex-col">
             Date:
             <input
-              className="mt-1 px-3 py-2 rounded border border-gray-300"
+              className="mt-1 px-3 py-2 rounded-sm border border-gray-300"
               type="date"
               name="date"
               value={inputs.date}

@@ -60,26 +60,26 @@ function App() {
     <>
       <Navbar />
       {/* Hero Section */}
-      <div className="pt-24 md:pt-20 flex flex-col w-full bg-customCream md:flex-row">
-        <div className="text-left w-full px-6 py-6 mt-0 md:py-16 lg:-mx-3 lg:px-24 lg:pr-12 text-customDarkBlue flex-1 ">
-          <h1 className="font-bold font-montserrat text-6xl md:text-9xl lg:text-7xl leading-tight">
+      <div className="pt-24 md:pt-20 flex flex-col w-full bg-custom-cream md:flex-row">
+        <div className="text-left w-full px-6 py-6 mt-0 md:py-16 lg:-mx-3 lg:px-24 lg:pr-12 text-custom-dark-blue flex-1 ">
+          <h1 className="font-bold font-montserrat text-6xl md:text-9xl lg:text-7xl leading-20 pt-4  ">
             <span className="block lg:whitespace-nowrap lg:inline">Elevate your</span>
             <span className="block lg:mt-2">academics</span>
           </h1>
 
           {/* For Desktop only */}
-          <p className="hidden font-medium font-montserrat text-lg md:text-2xl lg:text-3xl lg:max-w-144 text-customBlack mt-4 md:block outlin">
+          <p className="hidden font-medium font-montserrat text-lg md:text-2xl lg:text-3xl lg:max-w-144 text-custom-black mt-4 md:block leading-9">
             Take your learning to the next level with in-depth resources, expert
             guidance, and strategies to achieve academic excellence.
           </p>
           <br className="hidden md:block" />
           <div className="hidden md:block">
             {!user.email ? (
-              <button className="inline-block text-customCream bg-customDarkBlue rounded-[0.75rem] px-4 py-2 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold md:text-lg lg:text-[1.3rem] lg:-mt-1">
+              <button className="inline-block text-custom-cream bg-custom-dark-blue rounded-xl px-4 py-2 hover:bg-transparent hover:outline-solid hover:outline-custom-dark-blue hover:text-custom-dark-blue hover:scale-105 font-montserrat font-semibold md:text-lg lg:text-[1.3rem] lg:-mt-1">
                 <Link to="/account">Sign In</Link>
               </button>
             ) : (
-              <button className="inline-block text-customCream bg-customDarkBlue rounded-[0.75rem] px-4 py-2 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold md:text-lg lg:text-[1.3rem] lg:-mt-1">
+              <button className="inline-block text-custom-cream bg-custom-dark-blue rounded-xl px-4 py-2 hover:bg-transparent hover:outline-solid hover:outline-custom-dark-blue hover:text-custom-dark-blue hover:scale-105 font-montserrat font-semibold md:text-lg lg:text-[1.3rem] lg:-mt-1">
                 <Link to="/courses">Get Started</Link>
               </button>
             )}
@@ -89,23 +89,23 @@ function App() {
         {/* Image Content */}
         <img
           src="./cover.png"
-          className="flex-[2] max-h-[32rem] object-cover"
+          className="flex-2 max-h-144 object-cover"
           alt="Cover"
         />
 
         {/* Text Content */}
-        <div className="md:hidden text-left w-full px-6 pt-2 pb-8 md:py-0 lg:-mx-3 lg:-mt-2 text-customDarkBlue">
-          <p className="font-medium font-montserrat text-lg md:text-2xl lg:text-3xl lg:max-w-144 text-customBlack mt-4">
+        <div className="md:hidden text-left w-full px-6 pt-2 pb-8 md:py-0 lg:-mx-3 lg:-mt-2 text-custom-dark-blue">
+          <p className="font-medium font-montserrat text-lg md:text-2xl lg:text-3xl lg:max-w-144 text-custom-black mt-4">
             Take your learning to the next level with in-depth resources, expert
             guidance, and strategies to achieve academic excellence.
           </p>
           <br />
           {!user.email ? (
-            <button className="inline-block text-customCream bg-customDarkBlue rounded-[0.75rem] px-4 py-2 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold md:text-lg lg:text-[1.3rem] lg:-mt-1">
+            <button className="inline-block text-custom-cream bg-custom-dark-blue rounded-xl px-4 py-2 hover:bg-transparent hover:outline-solid hover:outline-custom-dark-blue hover:text-custom-dark-blue hover:scale-105 font-montserrat font-semibold md:text-lg lg:text-[1.3rem] lg:-mt-1">
               <Link to="/account">Sign In</Link>
             </button>
           ) : (
-            <button className="inline-block text-customCream bg-customDarkBlue rounded-[0.75rem] px-4 py-2 hover:bg-transparent hover:outline hover:outline-customDarkBlue hover:text-customDarkBlue hover:scale-105 font-montserrat font-semibold md:text-lg lg:text-[1.3rem] lg:-mt-1">
+            <button className="inline-block text-custom-cream bg-custom-dark-blue rounded-xl px-4 py-2 hover:bg-transparent hover:outline-solid hover:outline-custom-dark-blue hover:text-custom-dark-blue hover:scale-105 font-montserrat font-semibold md:text-lg lg:text-[1.3rem] lg:-mt-1">
               <Link to="/courses">Get Started</Link>
             </button>
           )}
@@ -116,8 +116,8 @@ function App() {
       {user.email && (
         <>
           {/* Subjects Section */}
-          <div className="flex flex-col items-center justify-center bg-customDarkBlue py-12 lg:py-20">
-            <h1 className="font-bold font-montserrat text-customCream text-3xl md:text-4xl lg:text-5xl text-center mb-8">
+          <div className="flex flex-col items-center justify-center bg-custom-dark-blue py-12 lg:py-20">
+            <h1 className="font-bold font-montserrat text-custom-cream text-3xl md:text-4xl lg:text-5xl text-center mb-8">
               What Do We Teach?
             </h1>
             <div className="grid grid-cols-1 gap-6 px-6 py-2 md:grid-cols-2 lg:grid-cols-2 lg:gap-12 lg:px-24 lg:py-6 w-full max-w-7xl">
@@ -126,10 +126,10 @@ function App() {
                   key={subject.id}
                   className="flex flex-col text-left"
                 >
-                  <h1 className="font-montserrat font-semibold text-xl md:text-2xl lg:text-3xl text-customCream mb-2">
+                  <h1 className="font-montserrat font-semibold text-xl md:text-2xl lg:text-3xl text-custom-cream mb-2">
                     {subject.name}
                   </h1>
-                  <p className="font-montserrat font-medium text-sm md:text-base lg:text-lg text-customCream">
+                  <p className="font-montserrat font-medium text-sm md:text-base lg:text-lg text-custom-cream">
                     {subject.description}
                   </p>
                 </div>
@@ -138,8 +138,8 @@ function App() {
           </div>
 
           {/* Facilities Section */}
-          <div className="flex flex-col items-center justify-center bg-customCream py-12 lg:py-20">
-            <h1 className="font-bold font-montserrat text-customDarkBlue text-3xl md:text-4xl lg:text-5xl text-center mb-8">
+          <div className="flex flex-col items-center justify-center bg-custom-cream py-12 lg:py-20">
+            <h1 className="font-bold font-montserrat text-custom-dark-blue text-3xl md:text-4xl lg:text-5xl text-center mb-8">
               Facilities
             </h1>
             <div className="grid grid-cols-1 gap-8 px-6 py-2 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 lg:px-12 lg:py-6 w-full max-w-7xl">
@@ -153,7 +153,7 @@ function App() {
                     className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mb-4"
                     alt={facility.description}
                   />
-                  <p className="font-montserrat font-medium text-lg lg:text-xl text-customBlack">
+                  <p className="font-montserrat font-medium text-lg lg:text-xl text-custom-black">
                     {facility.description}
                   </p>
                 </div>
