@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { useContext } from "react";
-import { UserContext } from "./UserContextProvider";
 
 const subjects = [
   {
@@ -54,7 +52,13 @@ const facilities = [
 ];
 
 function App() {
-  const { user } = useContext(UserContext) ?? { user: { email: "", name: "" } };
+  const logged_in = sessionStorage.getItem("user");
+  var user;
+  if (!logged_in) {
+    user = { name: "", email: "", picture: "" };
+  } else {
+    user = JSON.parse(logged_in);
+  }
 
   return (
     <>

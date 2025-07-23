@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { useContext } from "react";
-import { UserContext } from "../UserContextProvider";
 
 function Courses() {
   const semiPrivateCourses = [
@@ -46,18 +44,10 @@ function Courses() {
     },
   ];
 
-  const context = useContext(UserContext);
-
-  if (!context) {
-    throw new Error("UserContext must be used within a UserContextProvider");
-  }
-
-  const { user } = context;
-
-  const isUserEmpty = !user || (!user.name && !user.email);
-
-  if (isUserEmpty) {
+  const logged_in = sessionStorage.getItem("user");
+  if (!logged_in) {
     window.location.href = "/";
+    return;
   }
 
   return (

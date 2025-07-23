@@ -1,20 +1,11 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { UserContext } from "@/UserContextProvider";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const userContext = useContext(UserContext);
-
-  if (!userContext) {
-    throw new Error("UserContext is not available");
-  }
-
-  const { setUser } = userContext;
-
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -42,6 +33,7 @@ export default function Login() {
 
       console.log("Login successful", res.data);
       const token = res.data.token;
+      sessionStorage.setItem("token", JSON.stringify(token));
 
       const user = await axios.post(
         "https://way-finder-edu-api.vercel.app/api/user/userInfo",
@@ -54,11 +46,11 @@ export default function Login() {
       );
       console.log(user.data);
       sessionStorage.setItem("user", JSON.stringify(user.data));
-      setUser(user.data);
     } catch (err: any) {
       setError(err.response?.data?.message || "Login failed.");
     } finally {
       setLoading(false);
+      window.location.reload();
     }
   };
 

@@ -1,27 +1,8 @@
-import { useContext } from "react";
-import { UserContext } from "../UserContextProvider";
-
 function Logout() {
-  const userContext = useContext(UserContext);
-
-  if (!userContext) {
-    throw new Error("UserContext is not provided.");
-  }
-
-  const { setUser } = userContext;
-
   const handleLogout = () => {
     console.log("Log out successful");
     sessionStorage.clear();
-    setUser({
-      name: "",
-      username: "",
-      email: "",
-      accesstype: "",
-      school: "",
-      phone_number: "",
-      gender: "",
-    });
+    window.location.reload();
   };
 
   return (

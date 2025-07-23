@@ -1,203 +1,261 @@
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
-import { useEffect, useState, useContext } from "react";
-import { UserContext } from "../UserContextProvider";
+import { useEffect, useState } from "react";
+import { format } from "date-fns";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import React from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import AddMeeting from "../components/AddMeeting";
+import UpdateMeeting from "../components/UpdateMeeting";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+
+const BASE_URL = "https://way-finder-edu-api.vercel.app";
 
 interface Meeting {
   _id: string;
-  teacher: string;
-  student: string;
-  date: string;
+  start_time: string;
+  end_time: string;
+  student_name: string;
+  teacher_name: string;
   meeting_link: string;
-  __v: number;
+  materials: string;
 }
 
 function Meetings() {
-  const [meetings, setMeetings] = useState<any[]>([]);
-  const context = useContext(UserContext);
+  const [meetings, setMeetings] = useState<Meeting[]>([]);
   const [showAddMeetingForm, setShowAddMeetingForm] = useState(false);
+  const [showUpdateFormId, setShowUpdateFormId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!context) {
-    throw new Error("UserContext must be used within a UserContextProvider");
-  }
-
-  const { user } = context;
-  const rows = user.accesstype === "Admin" ? 5 : 4;
-
-  const isUserEmpty = !user || (!user.name && !user.email);
-
-  if (isUserEmpty) {
+  const logged_in = sessionStorage.getItem("user");
+  if (!logged_in) {
     window.location.href = "/";
+    return;
   }
+  const user = JSON.parse(logged_in);
 
-  function deleteClicked(value: string) {
-    axios
-      .delete(`https://way-finder-edu-api.vercel.app/api/meetings/${value}`)
-      .then(() => {
-        alert("Data deleted successfully!");
-        window.location.href = `/meetings`;
+  const deleteClicked = async (id: string) => {
+    const token_session = sessionStorage.getItem("token") as string;
+    const token = JSON.parse(token_session);
+    try {
+      await axios.delete(`${BASE_URL}/api/meeting/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
-  }
-
-  function addMeetingIsClicked() {
-    setShowAddMeetingForm((prev) => !prev);
-  }
+      alert("Meeting deleted successfully!");
+      setMeetings((prev) => prev.filter((m) => m._id !== id));
+    } catch {
+      alert("Failed to delete meeting.");
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
+      const token_session = sessionStorage.getItem("token");
+      if (!token_session) return;
+
+      const token = JSON.parse(token_session);
       try {
         const response = await axios.get(
-          `https://way-finder-edu-api.vercel.app/api/meetings`
+          `${BASE_URL}/api/meeting/user`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
-        setMeetings(
-          response.data
-            .filter(
-              (meeting: Meeting) =>
-                meeting.teacher === user.name || meeting.student === user.name
-            )
-            .sort(
-              (a: Meeting, b: Meeting) =>
-                new Date(a.date).getTime() - new Date(b.date).getTime()
-            )
-        );
-      } catch (error) {
-        console.error("Error fetching meetings:", error);
+
+        const raw_meetings = response.data;
+        const fetchedMeetings: Meeting[] = [];
+
+        for (const raw of raw_meetings) {
+          try {
+            const student = await axios.get(
+              `${BASE_URL}/api/user/${raw.student_id}`
+            );
+            const teacher = await axios.get(
+              `${BASE_URL}/api/user/${raw.teacher_id}`
+            );
+
+            fetchedMeetings.push({
+              _id: raw._id,
+              start_time: raw.start_time,
+              end_time: raw.end_time,
+              student_name: student.data.name,
+              teacher_name: teacher.data.name,
+              meeting_link: raw.meeting_link,
+              materials: raw.materials,
+            });
+          } catch (err) {
+            console.error("User fetch failed for meeting:", raw._id);
+          }
+        }
+
+        setMeetings(fetchedMeetings);
+      } catch (err) {
+        console.error("Failed to fetch meetings:", err);
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchData();
   }, []);
-
-  // console.log("Meetings: ", meetings);
-  // console.log("User: ", user);
 
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center pt-28 pb-6 bg-custom-cream">
-        <h1 className="text-center text-custom-black font-montserrat font-bold text-3xl pb-2 md:text-5xl lg:text-[2.5rem] lg:pb-4">
-          Your Meetings
-        </h1>
-        {meetings.length ? (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: `repeat(${rows}, 1fr)`, // Four columns: Teacher, Student, Date, Meeting Link
-              gap: "8px",
-              textAlign: "center",
-              border: "1px solid #ddd",
-            }}
-          >
-            {/* Header Row */}
-            <div
-              style={{
-                fontWeight: "bold",
-                backgroundColor: "#f0f0f0",
-                padding: "8px",
-              }}
-            >
-              Date
-            </div>
-            <div
-              style={{
-                fontWeight: "bold",
-                backgroundColor: "#f0f0f0",
-                padding: "8px",
-              }}
-            >
-              Teacher
-            </div>
-            <div
-              style={{
-                fontWeight: "bold",
-                backgroundColor: "#f0f0f0",
-                padding: "8px",
-              }}
-            >
-              Student
-            </div>
-            <div
-              style={{
-                fontWeight: "bold",
-                backgroundColor: "#f0f0f0",
-                padding: "8px",
-              }}
-            >
-              Meeting Link
-            </div>
-            {user.accesstype === "Admin" ? (
-              <div
-                style={{
-                  fontWeight: "bold",
-                  backgroundColor: "#f0f0f0",
-                  padding: "8px",
-                }}
-              ></div>
-            ) : (
-              <></>
-            )}
 
-            {/* Data Rows */}
-
-            {meetings.map((meeting, index) => (
-              <React.Fragment key={index}>
-                <div className="flex items-center p-2 border-b border-gray-300">
-                  <span className="flex-1">{meeting.date}</span>
-                </div>
-                <div className="flex items-center p-2 border-b border-gray-300">
-                  <span className="flex-1">{meeting.teacher}</span>
-                </div>
-                <div className="flex items-center p-2 border-b border-gray-300">
-                  <span className="flex-1">{meeting.student}</span>
-                </div>
-                <div className="flex items-center p-2 border-b border-gray-300">
-                  <span className="flex-1">{meeting.meeting_link}</span>
-                </div>
-                {user.accesstype === "Admin" ? (
-                  <div className="flex items-center justify-center p-2 border-b border-gray-300">
-                    <Link to={`/update-meeting/${meeting._id}`}>
-                      <img
-                        src="edit.png"
-                        className="h-10 w-10 ml-2"
-                        alt="Edit"
-                      />
-                    </Link>
-                    <button onClick={() => deleteClicked(meeting._id)}>
-                      <img
-                        src="delete.png"
-                        className="h-10 w-10 ml-2"
-                        alt="Delete"
-                      />
-                    </button>
-                  </div>
-                ) : (
-                  <></>
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-        ) : (
-          "No meetings available"
-        )}
-        {user.accesstype === "Admin" ? (
-          <button
-            onClick={addMeetingIsClicked}
-            className="my-4 flex items-center justify-center text-center text-custom-cream bg-custom-dark-blue rounded-xl px-5 py-3 font-montserrat font-medium text-2xl lg:text-2xl transition-transform duration-100 hover:text-custom-dark-blue hover:bg-custom-cream hover:outline-solid hover:outline-2 hover:outline-custom-dark-blue hover:scale-105"
-          >
-            Add Meeting
-          </button>
-        ) : (
-          <></>
-        )}
-      </div>
-      {showAddMeetingForm ? (
-        <AddMeeting onClose={() => setShowAddMeetingForm(false)} />
+      {loading ? (
+        <div className="flex flex-col justify-center items-center min-h-[50vh] bg-custom-cream text-custom-dark-blue">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-custom-dark-blue"></div>
+          <span className="mt-4 text-xl font-semibold font-montserrat">
+            Loading meetings...
+          </span>
+        </div>
       ) : (
-        <></>
+        <>
+          <div className="w-full bg-custom-dark-blue text-custom-cream px-6 py-20 lg:px-24 mt-22 flex justify-center">
+            <div className="max-w-5xl text-center">
+              <h2 className="text-2xl md:text-3xl font-bold font-montserrat mb-4">
+                Want to schedule a new meeting?
+              </h2>
+              <p className="text-base md:text-lg font-montserrat mb-6">
+                Book a personalized session with just one click.
+              </p>
+              <button
+                onClick={() =>
+                  (window.location.href = "/book-now")
+                }
+                className="bg-custom-cream text-custom-dark-blue font-montserrat font-medium text-lg lg:text-2xl px-6 py-3 rounded-lg transform hover:scale-105 transition-all"
+              >
+                Order Now
+              </button>
+            </div>
+          </div>
+
+          <main className="flex flex-col items-center pt-15 md:pt-20 px-4 bg-custom-cream min-h-[60%] py-20">
+            <Card className="w-full max-w-6xl bg-custom-cream shadow-none border-none px-2 md:px-6">
+              <CardHeader className="text-center">
+                <CardTitle className="text-2xl md:text-4xl font-bold text-custom-dark-blue font-montserrat">
+                  Your Meetings
+                </CardTitle>
+              </CardHeader>
+
+              <CardContent className="overflow-x-auto mt-4">
+                {meetings.length > 0 ? (
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="bg-[#fdf6ee] text-custom-dark-blue/90">
+                        <TableHead>Date</TableHead>
+                        <TableHead>Start Time</TableHead>
+                        <TableHead>End Time</TableHead>
+                        <TableHead>Teacher</TableHead>
+                        <TableHead>Student</TableHead>
+                        <TableHead>Meeting Link</TableHead>
+                        {user.accesstype === "Admin" && <TableHead>Actions</TableHead>}
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {meetings.map((meeting) => (
+                        <TableRow
+                          key={meeting._id}
+                          className="hover:bg-[#fcf3e8] transition duration-200"
+                        >
+                          <TableCell>
+                            {format(new Date(meeting.start_time), "PP")}
+                          </TableCell>
+                          <TableCell>
+                            {format(new Date(meeting.start_time), "p")}
+                          </TableCell>
+                          <TableCell>
+                            {format(new Date(meeting.end_time), "p")}
+                          </TableCell>
+                          <TableCell>{meeting.teacher_name}</TableCell>
+                          <TableCell>{meeting.student_name}</TableCell>
+                          <TableCell>
+                            {meeting.meeting_link ===
+                            "Meeting link has not been provided" ? (
+                              <>{meeting.meeting_link}</>
+                            ) : (
+                              <a
+                                href={meeting.meeting_link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-custom-dark-blue font-medium underline hover:text-blue-700"
+                              >
+                                Link
+                              </a>
+                            )}
+                          </TableCell>
+                          {user.accesstype === "Admin" && (
+                            <TableCell className="flex gap-2">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="border-custom-dark-blue text-custom-dark-blue hover:bg-custom-dark-blue hover:text-custom-cream rounded-xl"
+                                onClick={() => setShowUpdateFormId(meeting._id)}
+                              >
+                                Edit
+                              </Button>
+                              <Button
+                                variant="destructive"
+                                size="sm"
+                                className="rounded-xl"
+                                onClick={() => deleteClicked(meeting._id)}
+                              >
+                                Delete
+                              </Button>
+                            </TableCell>
+                          )}
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                ) : (
+                  <p className="text-center text-custom-dark-blue/70 font-medium py-4 font-montserrat">
+                    No meetings available.
+                  </p>
+                )}
+              </CardContent>
+            </Card>
+
+            {user.accesstype === "Admin" && (
+              <Button
+                onClick={() => setShowAddMeetingForm((prev) => !prev)}
+                className="mt-6 text-lg px-6 py-3 bg-custom-dark-blue text-custom-cream hover:bg-transparent hover:border hover:border-custom-dark-blue hover:text-custom-dark-blue hover:scale-105 transition rounded-xl"
+              >
+                {showAddMeetingForm ? "Close Add Meeting" : "Add Meeting"}
+              </Button>
+            )}
+          </main>
+        </>
       )}
+
+      {showAddMeetingForm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 transition-opacity duration-300">
+          <AddMeeting onClose={() => setShowAddMeetingForm(false)} />
+        </div>
+      )}
+
+      {showUpdateFormId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 transition-opacity duration-300">
+          <UpdateMeeting
+            meetingId={showUpdateFormId}
+            onClose={() => setShowUpdateFormId(null)}
+          />
+        </div>
+      )}
+
       <Footer />
     </>
   );

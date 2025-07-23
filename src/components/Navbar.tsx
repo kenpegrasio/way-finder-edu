@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
-import { UserContext } from "../UserContextProvider";
+import { useState } from "react";
 
 function Navbar() {
-  const { user } = useContext(UserContext) ?? {
-    user: { name: "", email: "", picture: "" },
-  };
+  const logged_in = sessionStorage.getItem("user");
+  var user;
+  if (!logged_in) {
+    user = { name: "", email: "", picture: "" };
+  } else {
+    user = JSON.parse(logged_in);
+  }
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -15,7 +18,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="fixed z-50 w-screen flex bg-custom-cream justify-center md:justify-start items-center py-4 md:h-auto md:gap-4 md:pl-10 shadow-custom-dark-blue">
+    <nav className="fixed top-0 left-0 right-0 z-50 w-screen flex bg-custom-cream justify-center md:justify-start items-center py-4 md:h-auto md:gap-4 md:pl-10 shadow-custom-dark-blue">
       {user.email ? (
         <div className="flex-1 pl-3 md:hidden">
           <img src="/burger-menu.svg" alt="menu" onClick={burgerClicked} />

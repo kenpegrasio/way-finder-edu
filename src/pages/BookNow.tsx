@@ -1,22 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { useContext } from "react";
-import { UserContext } from "../UserContextProvider";
 
 function BookNow() {
-  const context = useContext(UserContext);
+  const navigate = useNavigate();
 
-  if (!context) {
-    throw new Error("UserContext must be used within a UserContextProvider");
-  }
-
-  const { user } = context;
-
-  const isUserEmpty = !user || (!user.name && !user.email);
-
-  if (isUserEmpty) {
-    window.location.href = '/'
+  const token = sessionStorage.getItem("token");
+  if (!token) {
+    navigate("/");
+    return;
   }
 
   return (
@@ -28,9 +20,9 @@ function BookNow() {
         </div>
         <div className="flex flex-col md:flex-row justify-center items-center md:mt-12">
           <img
-          src="/logo-dark.svg"
-          alt="Logo"
-          className="h-32 md:h-44 mb-5 md:mr-8 md:-my-12 px-3 py-3 border-4 border-custom-black rounded-full "
+            src="/logo-dark.svg"
+            alt="Logo"
+            className="h-32 md:h-44 mb-5 md:mr-8 md:-my-12 px-3 py-3 border-4 border-custom-black rounded-full "
           />
           <div className="font-montserrat flex flex-col justify-center items-center md:items-start">
             <div className="text-custom-black text-center md:text-left font-semibold text-3xl md:text-5xl mb-5">
@@ -43,7 +35,6 @@ function BookNow() {
             </button>
           </div>
         </div>
-        
       </div>
 
       <Footer />

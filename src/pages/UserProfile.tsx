@@ -1,17 +1,14 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useContext } from "react";
-import { UserContext } from "../UserContextProvider";
 import Logout from "../components/Logout";
 
 function UserProfile() {
-  const context = useContext(UserContext);
-
-  if (!context) {
-    throw new Error("UserContext must be used within a UserContextProvider");
+  const logged_in = sessionStorage.getItem("user");
+  if (!logged_in) {
+    window.location.href = "/";
+    return;
   }
-
-  const user = context;
+  const user = JSON.parse(logged_in);
   
   return (
     <>
@@ -26,8 +23,8 @@ function UserProfile() {
             />
           </div>
           <div className="flex flex-col align-center justify-center text-center md:text-left lg:text-left">
-            <p className="font-bold font-montserrat text-custom-black text-5xl pb-1 lg:pb-1/2 md:text-[2.75rem] lg:text-[2.75rem]">{user.user.name}</p>
-            <p className="font-semibold font-montserrat text-custom-dark-blue text-[1.15rem] md:text-3xl lg:text-3xl">{user.user.email}</p>
+            <p className="font-bold font-montserrat text-custom-black text-5xl pb-1 lg:pb-1/2 md:text-[2.75rem] lg:text-[2.75rem]">{user.name}</p>
+            <p className="font-semibold font-montserrat text-custom-dark-blue text-[1.15rem] md:text-3xl lg:text-3xl">{user.email}</p>
             <br />
             <div className="-mt-2 lg:-mt-1">
               <Logout />

@@ -1,11 +1,20 @@
-import { useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { UserContext } from "../UserContextProvider";
+
+const BASE_URL = "https://way-finder-edu-api.vercel.app";
+
+interface User {
+  _id: string;
+  name: string;
+  accesstype: string;
+}
 
 interface Inputs {
-  teacher: string;
-  student: string;
-  date: string;
+  teacher_id: string;
+  student_id: string;
+  start_time: string;
+  end_time: string;
+  meeting_link: string;
 }
 
 interface AddMeetingProps {
@@ -14,44 +23,96 @@ interface AddMeetingProps {
 
 function AddMeeting({ onClose }: AddMeetingProps) {
   const [inputs, setInputs] = useState<Inputs>({
-    teacher: "",
-    student: "",
-    date: "",
+    teacher_id: "",
+    student_id: "",
+    start_time: "",
+    end_time: "",
+    meeting_link: "",
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [teachers, setTeachers] = useState<User[]>([]);
+  const [students, setStudents] = useState<User[]>([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const token_session = sessionStorage.getItem("token");
+      if (!token_session) {
+        window.location.href = "/";
+        return;
+      }
+      const token = JSON.parse(token_session);
+      try {
+        const res = await axios.get(`${BASE_URL}/api/user/allUsers`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const allUsers: User[] = res.data;
+
+        setTeachers(allUsers.filter((user) => user.accesstype === "Admin"));
+        setStudents(allUsers.filter((user) => user.accesstype === "User"));
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = event.target;
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(inputs);
-    if (inputs.teacher === "" || inputs.date === "" || inputs.student === "") {
-      alert("One of the inputs is empty!");
+    const { teacher_id, student_id, start_time, end_time, meeting_link } =
+      inputs;
+
+    if (
+      !teacher_id ||
+      !student_id ||
+      !start_time ||
+      !end_time
+    ) {
+      alert("Please fill in all fields.");
       return;
     }
-    axios
-      .post(`https://way-finder-edu-api.vercel.app/api/meetings`, {
-        teacher: inputs.teacher,
-        student: inputs.student,
-        date: inputs.date,
-      })
-      .then((res) => {
-        console.log(res);
-        alert("Data saved!");
-        window.location.href = `/meetings`;
+
+    try {
+      const token_session = sessionStorage.getItem("token");
+      if (!token_session) {
+        window.location.href = "/";
+        return;
+      }
+      const token = JSON.parse(token_session);
+      await axios.post(`${BASE_URL}/api/meeting`, {
+        teacher_id,
+        student_id,
+        start_time,
+        end_time,
+        meeting_link,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
+      alert("Meeting created successfully!");
+      window.location.reload();
+    } catch (error) {
+      console.error("Failed to add meeting:", error);
+      alert("Failed to create meeting.");
+    }
   };
 
-  const context = useContext(UserContext);
-
-  if (!context) {
-    throw new Error("UserContext must be used within a UserContextProvider");
+  const logged_in = sessionStorage.getItem("user");
+  if (!logged_in) {
+    window.location.href = "/";
+    return;
   }
-
-  const { user } = context;
-
+  const user = JSON.parse(logged_in);
   if (user.accesstype !== "Admin") {
     return <h1>Unauthorized</h1>;
   }
@@ -59,41 +120,81 @@ function AddMeeting({ onClose }: AddMeetingProps) {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="relative bg-white rounded-lg shadow-lg p-6 w-full max-w-md text-center">
-      <button className="absolute top-2 right-2 text-black font-bold text-xl" onClick={onClose}>
-            ×
-          </button>
+        <button
+          className="absolute top-2 right-2 text-black font-bold text-xl"
+          onClick={onClose}
+        >
+          ×
+        </button>
         <h1 className="font-bold text-2xl mb-4">Add Meeting</h1>
         <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
-          <label className="flex flex-col">
+          <label className="flex flex-col text-left">
             Teacher:
-            <input
-              className="mt-1 px-3 py-2 rounded-sm border border-gray-300"
-              type="text"
-              name="teacher"
-              value={inputs.teacher}
+            <select
+              name="teacher_id"
+              value={inputs.teacher_id}
               onChange={handleChange}
-            />
+              className="mt-1 px-3 py-2 rounded-sm border border-gray-300"
+            >
+              <option value="">Select a teacher</option>
+              {teachers.map((t) => (
+                <option key={t._id} value={t._id}>
+                  {t.name}
+                </option>
+              ))}
+            </select>
           </label>
-          <label className="flex flex-col">
+
+          <label className="flex flex-col text-left">
             Student:
-            <input
+            <select
+              name="student_id"
+              value={inputs.student_id}
+              onChange={handleChange}
               className="mt-1 px-3 py-2 rounded-sm border border-gray-300"
+            >
+              <option value="">Select a student</option>
+              {students.map((s) => (
+                <option key={s._id} value={s._id}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className="flex flex-col text-left">
+            Start Time:
+            <input
+              type="datetime-local"
+              name="start_time"
+              value={inputs.start_time}
+              onChange={handleChange}
+              className="mt-1 px-3 py-2 rounded-sm border border-gray-300"
+            />
+          </label>
+
+          <label className="flex flex-col text-left">
+            End Time:
+            <input
+              type="datetime-local"
+              name="end_time"
+              value={inputs.end_time}
+              onChange={handleChange}
+              className="mt-1 px-3 py-2 rounded-sm border border-gray-300"
+            />
+          </label>
+
+          <label className="flex flex-col text-left">
+            Meeting Link:
+            <input
               type="text"
-              name="student"
-              value={inputs.student}
+              name="meeting_link"
+              value={inputs.meeting_link}
               onChange={handleChange}
-            />
-          </label>
-          <label className="flex flex-col">
-            Date:
-            <input
               className="mt-1 px-3 py-2 rounded-sm border border-gray-300"
-              type="date"
-              name="date"
-              value={inputs.date}
-              onChange={handleChange}
             />
           </label>
+
           <div className="flex justify-center gap-4 mt-4">
             <button
               type="submit"
