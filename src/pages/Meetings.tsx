@@ -28,7 +28,7 @@ function Meetings() {
   const { user } = context;
   const rows = user.accesstype === "Admin" ? 5 : 4;
 
-  const isUserEmpty = !user || (!user.picture && !user.name && !user.email);
+  const isUserEmpty = !user || (!user.name && !user.email);
 
   if (isUserEmpty) {
     window.location.href = "/";

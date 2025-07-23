@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { UserContext } from "@/UserContextProvider";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const userContext = useContext(UserContext);
@@ -13,6 +14,8 @@ export default function Login() {
   }
 
   const { setUser } = userContext;
+
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     emailOrUsername: "",
@@ -32,7 +35,7 @@ export default function Login() {
     setError(null);
 
     try {
-      const res = await axios.post("http://localhost:8000/api/user/login", {
+      const res = await axios.post("https://way-finder-edu-api.vercel.app/api/user/login", {
         emailOrUsername: form.emailOrUsername,
         password: form.password,
       });
@@ -41,7 +44,7 @@ export default function Login() {
       const token = res.data.token;
 
       const user = await axios.post(
-        "http://localhost:8000/api/user/userInfo",
+        "https://way-finder-edu-api.vercel.app/api/user/userInfo",
         {},
         {
           headers: {
@@ -115,6 +118,15 @@ export default function Login() {
           {loading ? "Logging in..." : "Login"}
         </Button>
       </form>
+      <p className="font-semibold mt-6 text-center text-custom-dark-blue text-md font-montserrat">
+        Don't have an account?{" "}
+        <span
+          className="text-blue-600 hover:underline cursor-pointer"
+          onClick={() => navigate("/register")}
+        >
+          Register now
+        </span>
+      </p>
     </div>
   );
 }

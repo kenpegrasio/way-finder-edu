@@ -6,6 +6,7 @@ import BookNow from "./pages/BookNow";
 import NotFound from "./pages/NotFound";
 import Meetings from "./pages/Meetings";
 import UpdateMeeting from "./components/UpdateMeeting";
+import RegisterPage from "./pages/RegisterPage";
 
 const routes = [
     {
@@ -23,6 +24,10 @@ const routes = [
     {
         path: "/account",
         element: <Account />
+    },
+    {
+        path: "/register",
+        element: <RegisterPage />
     },
     {
         path: "/book-now",

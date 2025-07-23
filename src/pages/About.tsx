@@ -12,7 +12,7 @@ function About() {
 
   const { user } = context;
 
-  const isUserEmpty = !user || (!user.picture && !user.name && !user.email);
+  const isUserEmpty = !user || (!user.name && !user.email);
 
   if (isUserEmpty) {
     window.location.href = "/";

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../UserContextProvider";
-import LoginPage from "../components/LoginPage";
-import UserProfile from "../components/UserProfile";
+import LoginPage from "./LoginPage";
+import UserProfile from "./UserProfile";
 
 function Account() {
   const context = useContext(UserContext);

@@ -1,8 +1,8 @@
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { useContext } from "react";
 import { UserContext } from "../UserContextProvider";
-import Logout from "./Logout";
+import Logout from "../components/Logout";
 
 function UserProfile() {
   const context = useContext(UserContext);
@@ -12,7 +12,7 @@ function UserProfile() {
   }
 
   const user = context;
-  console.log(user.user.picture)
+  
   return (
     <>
       <Navbar />
