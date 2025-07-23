@@ -5,7 +5,6 @@ import Account from "./pages/Account";
 import BookNow from "./pages/BookNow";
 import NotFound from "./pages/NotFound";
 import Meetings from "./pages/Meetings";
-import UpdateMeeting from "./components/UpdateMeeting";
 import RegisterPage from "./pages/RegisterPage";
 
 const routes = [
@@ -36,10 +35,6 @@ const routes = [
     {
         path: "/meetings",
         element: <Meetings />
-    },
-    {
-        path: "/update-meeting/:id",
-        element: <UpdateMeeting />
     },
     {
         path: "*",
