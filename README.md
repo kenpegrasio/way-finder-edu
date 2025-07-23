@@ -7,19 +7,13 @@
    cd <repository-directory>
    ```
 
-2. **Set up environment variables**
-
-   ```sh
-   cp .env.example .env
-   ```
-
-3. **Install dependencies**
+2. **Install dependencies**
 
    ```sh
    npm install
    ```
 
-4. **Run the development server**
+3. **Run the development server**
 
    ```sh
    npm run dev
