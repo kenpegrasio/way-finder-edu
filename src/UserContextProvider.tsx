@@ -1,13 +1,13 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 
 interface User {
-  _id: string;
   name: string;
+  username: string;
   email: string;
-  google_id: string;
   accesstype: string;
-  picture: string;
-  __v: number;
+  school: string;
+  phone_number: string;
+  gender: string;
 }
 
 export const UserContext = createContext<{
@@ -21,13 +21,13 @@ interface UserContextProviderProps {
 
 function UserContextProvider({ children }: UserContextProviderProps) {
   const [user, setUser] = useState<User>({
-    _id: "",
     name: "",
+    username: "",
     email: "",
-    google_id: "",
     accesstype: "",
-    picture: "",
-    __v: 0,
+    school: "",
+    phone_number: "",
+    gender: ""
   });
 
   useEffect(() => {

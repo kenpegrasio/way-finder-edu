@@ -1,4 +1,3 @@
-import { googleLogout } from "@react-oauth/google";
 import { useContext } from "react";
 import { UserContext } from "../UserContextProvider";
 
@@ -12,17 +11,16 @@ function Logout() {
   const { setUser } = userContext;
 
   const handleLogout = () => {
-    googleLogout();
     console.log("Log out successful");
     sessionStorage.clear();
     setUser({
-      _id: "",
       name: "",
+      username: "",
       email: "",
-      google_id: "",
       accesstype: "",
-      picture: "",
-      __v: 0,
+      school: "",
+      phone_number: "",
+      gender: "",
     });
   };
 

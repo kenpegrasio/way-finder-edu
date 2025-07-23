@@ -1,10 +1,19 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
+import { UserContext } from "@/UserContextProvider";
 
 export default function Login() {
+  const userContext = useContext(UserContext);
+
+  if (!userContext) {
+    throw new Error("UserContext is not available");
+  }
+
+  const { setUser } = userContext;
+
   const [form, setForm] = useState({
     emailOrUsername: "",
     password: "",
@@ -29,6 +38,20 @@ export default function Login() {
       });
 
       console.log("Login successful", res.data);
+      const token = res.data.token;
+
+      const user = await axios.post(
+        "http://localhost:8000/api/user/userInfo",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(user.data);
+      sessionStorage.setItem("user", JSON.stringify(user.data));
+      setUser(user.data);
     } catch (err: any) {
       setError(err.response?.data?.message || "Login failed.");
     } finally {

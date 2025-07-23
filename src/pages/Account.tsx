@@ -1,10 +1,7 @@
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useContext } from "react";
 import { UserContext } from "../UserContextProvider";
 import LoginPage from "../components/LoginPage";
 import UserProfile from "../components/UserProfile";
-
-const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 function Account() {
   const context = useContext(UserContext);
@@ -15,12 +12,12 @@ function Account() {
 
   const { user } = context;
 
-  const isUserEmpty = !user || (!user.picture && !user.name && !user.email);
+  const isUserEmpty = !user || (!user.name && !user.email);
 
   return (
-    <GoogleOAuthProvider clientId={clientId}>
+    <>
       {isUserEmpty ? <LoginPage /> : <UserProfile />}
-    </GoogleOAuthProvider>
+    </>
   );
 }
 
