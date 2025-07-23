@@ -50,7 +50,7 @@ export default function Register() {
     return true;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -65,7 +65,7 @@ export default function Register() {
     }
 
     try {
-      const res = await axios.post("https://way-finder-edu-api.vercel.app//api/user/register", form);
+      const res = await axios.post("https://way-finder-edu-api.vercel.app/api/user/register", form);
       console.log("Registration successful", res.data);
       navigate("/account");
     } catch (err: any) {
@@ -89,7 +89,6 @@ export default function Register() {
           { id: "school", label: "School" },
           { id: "password", label: "Password", type: "password" },
           { id: "phone_number", label: "Phone Number" },
-          { id: "gender", label: "Gender" },
         ].map(({ id, label, type = "text" }) => (
           <div key={id} className="text-left space-y-2">
             <Label
@@ -110,6 +109,29 @@ export default function Register() {
             />
           </div>
         ))}
+
+        {/* Gender dropdown */}
+        <div className="text-left space-y-2">
+          <Label
+            htmlFor="gender"
+            className="text-custom-dark-blue font-montserrat text-lg font-semibold"
+          >
+            Gender
+          </Label>
+          <select
+            id="gender"
+            name="gender"
+            value={form.gender}
+            onChange={handleChange}
+            className="w-full bg-white/70 text-custom-dark-blue border border-custom-dark-blue px-4 py-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-custom-dark-blue"
+            required
+          >
+            <option value="">Select your gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Rather not say">Rather not say</option>
+          </select>
+        </div>
 
         {error && (
           <p className="text-red-500 text-md font-montserrat text-center">
